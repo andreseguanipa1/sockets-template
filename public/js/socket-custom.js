@@ -14,19 +14,27 @@ socket.on('disconnect', function() {
 
 });
 
-//Enviar información - Retroalimentación
+//Escuchar información
+
+socket.on('enviarMensaje', function(resp) {
+    console.log(resp.usuario + ', ' + resp.mensaje);
+});
+
+//Enviar información
 
 socket.emit('enviarMensaje', {
+    usuario: 'Andres',
+    mensaje: 'Hola Mundo'
+
+});
+
+//Enviar información - Retroalimentación
+
+socket.emit('retroalimentacion', {
     usuario: 'Andres',
     mensaje: 'Hola Mundo'
 
 }, function(res) {
     console.log('Respuesta server: ', res.resp);
 
-});
-
-//Escuchar información
-
-socket.on('enviarMensaje', function(resp) {
-    console.log(resp.usuario + ', ' + resp.mensaje);
 });

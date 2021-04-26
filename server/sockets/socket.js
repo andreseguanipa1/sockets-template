@@ -19,22 +19,23 @@ io.on('connection', (client) => {
 
     client.on('enviarMensaje', (data, callback) => {
 
-        console.log(data);
-
         client.emit('enviarMensaje', data)
         client.broadcast.emit('enviarMensaje', data)
 
+    });
 
+    //Mensaje retroalimentación
 
-        /*         if (mensaje.usuario) {
-                    callback({
-                        resp: 'Todo salió bien!'
-                    });
-                } else {
-                    callback({
-                        resp: 'Todo salió mal!!!!!!!'
-                    });
-                } */
+    client.on('retroalimentacion', (data, callback) => {
+
+        console.log(data);
+
+        if (!data.usuario) {
+            callback({ resp: 'Error!' });
+
+        } else {
+            callback({ resp: 'Todo bien!' });
+        }
 
     });
 
